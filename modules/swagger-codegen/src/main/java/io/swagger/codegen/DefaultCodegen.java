@@ -3053,16 +3053,14 @@ public class DefaultCodegen {
      * @return The underscored version of the word
      */
     public static String underscore(String word) {
-        String firstPattern = "([A-Z]+)([A-Z][a-z])";
-        String secondPattern = "([a-z\\d])([A-Z])";
+        String toCheckPattern = "([a-z\\d])([A-Z])";
         String replacementPattern = "$1_$2";
         // Replace package separator with slash.
         word = word.replaceAll("\\.", "/"); // FIXME: a parameter should not be assigned. Also declare the methods parameters as 'final'.
         // Replace $ with two underscores for inner classes.
         word = word.replaceAll("\\$", "__");
         // Replace capital letter with _ plus lowercase letter.
-        word = word.replaceAll(firstPattern, replacementPattern);
-        word = word.replaceAll(secondPattern, replacementPattern);
+        word = word.replaceAll(toCheckPattern, replacementPattern);
         word = word.replace('-', '_');
         // replace space with underscore
         word = word.replace(' ', '_');
